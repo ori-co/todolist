@@ -1,6 +1,8 @@
-const express = require('express')
+const express = require('express');
 const app = express();
-const {Item, ReadItem} = require('./item')
+const fs = require("fs");
+var server  = require('http').createServer(app);
+var io      = require('socket.io').listen(server);
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
@@ -8,7 +10,6 @@ app.get('/', (req, res) => {
 
 app.use(express.static('public'));
 
-/*
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -24,7 +25,7 @@ app.use(function (req, res, next) {
 
   // Pass to next layer of middleware
   next();
-});*/
+});
 
 app.listen(8000, () => {
   console.log('http://localhost:8000');
@@ -42,7 +43,22 @@ child4.setParent(child1);
 console.log(JSON.stringify(root.serializable()));
 */
 
-var fs = require("fs");
-var json = fs.readFileSync("data/root.json");
-var root = ReadItem(JSON.parse(json), "");
-console.log(JSON.stringify(root.serializable()));
+function ReadData(src){
+  var json = fs.readFileSync(src);
+  var root = ReadItem(JSON.parse(json), "");
+
+  console.log(JSON.stringify(root.serializable()));
+
+  return root;
+}
+
+// Quand un client se connecte, on le note dans la console
+io.sockets.on('connection', function (socket) {
+  socket.on('getData', function (data, src) {
+      console.log(">> Get JSON data");
+
+      var json = fs.readFileSync("data/"+src);
+
+      socket.emit('JSONdata',json);
+  });
+});

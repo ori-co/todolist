@@ -1,10 +1,3 @@
-
-module.exports = {
-  Item: Item, 
-  ReadItem: ReadItem
-};
-
-
 function Item(parent, name, autoStatus, status=0, notes="") {
   this.creationDate=Date.now(),
   this.parent=parent,
@@ -83,7 +76,7 @@ function Item(parent, name, autoStatus, status=0, notes="") {
 };
 
 function ReadItem(serializableItem, parent=""){
-  let root = new Item(parent, serializableItem.name,serializableItem.autoStatus, serializableItem.status, serializableItem.notes);
+  let root = new Item(parent, serializableItem.name,serializableItem.autoStatus, serializableItem.status, serializableItem.no);
   for (let i=0; i<serializableItem.children.length; i++){
     const childItem = ReadItem(serializableItem.children[i], root);
     root.children.push(childItem);
