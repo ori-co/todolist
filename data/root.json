@@ -1,3 +1,42 @@
 {
-
+    "creationDate": 1574703603315,
+    "name": "root",
+    "status": null,
+    "autoStatus": true,
+    "notes": "",
+    "children": [
+        {
+            "creationDate": 1574703603315,
+            "name": "First Subject",
+            "status": 3,
+            "autoStatus": true,
+            "notes": "very important",
+            "children": [
+                {
+                    "creationDate": 1574703603315,
+                    "name": "Sub subject",
+                    "status": 3,
+                    "autoStatus": false,
+                    "notes": "",
+                    "children": []
+                }
+            ]
+        },
+        {
+            "creationDate": 1574703603315,
+            "name": "Second Subject",
+            "status": 1,
+            "autoStatus": false,
+            "notes": "",
+            "children": []
+        },
+        {
+            "creationDate": 1574703603315,
+            "name": "Last Subject",
+            "status": 2,
+            "autoStatus": true,
+            "notes": "",
+            "children": []
+        }
+    ]
 }
